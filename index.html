@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>我的导航</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<header></header>
+	<main>
+		<div class="wrapper" id="mian"></div>
+		
+	</main>
+	<footer></footer>
+	<script>
+		keys = {
+			0:['q','w','e','r','t','y','u','i','o','p'],
+			1:['a','s','d','f','g','h','j','k','l'],
+			2:['z','x','c','v','b','n','m'],
+			length: 3
+		}
+		hash = {
+			'q': 'qq.com',
+			'w': 'weibo.com',
+			'e': 'ebay.com',
+			'r': 'rolex.com',
+			't': 'taobao.com',
+			'y': 'yy.com',
+			'u': 'uc.cn',
+			'i': 'iqiyi.com',
+			'o': 'opera.com',
+			'p': 'pro.25pp.com',
+			'a': 'acfun.cn',
+			's': 'sougou.com',
+			'd': 'douyu.com',
+			'f': 'facebook.com',
+			'g': 'google.com',
+			'h': 'huya.com',
+			'j': 'jianshu.com',
+			'k': 'kanzhun.com',
+			'l': 'lagou.com',
+			'z': 'zhihu.com',
+			'x': 'xx.com',
+			'c': 'c.163.com',
+			'v': 'v.qq.com',
+			'b': 'bilibili.com',
+			'n': 'nnn.com',
+			'm': 'mcdonalds.com',
+		}
+		hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+		if(hashInLocalStorage){
+			hash = hashInLocalStorage
+		}
+
+
+		index = 0
+		while(index < keys['length']){
+			div = document.createElement('div')
+			div.className = 'row'
+		    mian.appendChild(div)
+		    row = keys[index]
+		    index2=0
+		    while(index2 < row['length']){
+		    	kbd = document.createElement('kbd')
+				span = document.createElement('span')
+		    	span.textContent = row[index2]
+				span.className = "text"
+				kbd.appendChild(span)
+		    	kbd.className = 'key'
+		    	button = document.createElement('button')
+		    	button.textContent = '编辑'
+		    	button.id = row[index2]
+				img = document.createElement('img')
+				if(hash[row[index2]]){
+					img.src = 'http://'+hash[row[index2]]+'/favicon.ico'
+				}else{
+					img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
+				}
+				
+		    	button.onclick = function(xzkjcnxlkcjlk){
+		    		key = xzkjcnxlkcjlk['target']['id']
+		    		x = prompt('请输入一个网址')
+		    		hash[key] = x
+		    		localStorage.setItem('zzz',JSON.stringify(hash))
+		    		console.log(hash)
+		    	}
+		    	kbd.appendChild(img)
+		    	kbd.appendChild(button)
+		    	div.appendChild(kbd)
+		    	index2 = index2 + 1
+		    }
+            index = index + 1
+		}
+		
+		document.onkeypress = function(xzkjcnxlkcjlk){
+			key = xzkjcnxlkcjlk['key']
+			website = hash[key]
+			window.open('http://'+website,'_blank')
+		}
+	</script>
+</body>
+</html>
